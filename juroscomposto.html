@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+	<style type="text/css">
+	    div{
+	    	top: -200px;
+	    	right: 100px;
+	    }
+
+	    form{
+			margin-left: 550px;
+			margin-right: 550px;
+			border-radius: 50px;
+			border-width: thin;
+		    border-style: outset;
+		    border-color: gold;
+		}
+
+		body{
+			border-width: thick;
+		    border-style: double;
+		    border-color: gold;
+			align-items: center;
+			font-family:"Lobster";
+			text-align: center;
+			background: #EE82EE;	
+		}		
+	</style>
+
+	<script type="text/javascript">
+		function calcular(){
+		event.preventDefault();
+
+		var inicial=document.getElementById("inicial").value;
+		var aporte=document.getElementById("aporte").value;
+		var taxa=document.getElementById("taxa").value;
+		var prazo=document.getElementById("prazo").value;
+		var taxa2=taxa/100;
+		var final=inicial;
+		var mesames={};
+
+		for(var i=0;i<prazo;i++){
+			final=final*((1+taxa2)+aporte);
+			mesames[i]=final;
+                
+		}
+
+		for(var i=0;i<prazo;i++){
+            mesames[i]=mesames[i].toFixed(2);
+            var pp = document.createElement("div");
+            var kk = document.createTextNode(1+i+" ACUMULADO - "+mesames[i]);
+            pp.appendChild(kk);
+            document.body.appendChild(pp);
+            }
+
+
+		final=final.toFixed(2);
+            document.getElementById("final").innerHTML="valor acumulado:"+final;
+        }
+
+
+            
+	</script>
+	
+</head>
+
+<body>
+
+	<h1>CALCULADORA DE JUROS COMPOSTOS</h1>
+	<form>
+		investimento:<br>
+		<input type="text" id="inicial"></input><br>
+		adicional mensal:<br>
+		<input type="text" id="aporte"></input><br>
+		taxa mensal (%):<br>
+		<input type="text" id="taxa"></input><br>
+		quantidade de meses:<br>
+		<input type="text" id="prazo"></input><br>
+		<button onclick="calcular()">Iniciar</button>
+    </form>
+    <br>
+    <div id="final"></div><br>
+
+</body>
+</html>
